@@ -1,6 +1,16 @@
-/* App container */
 .app {
   min-height: 100vh;
+}
+
+/* Push page content away from the fixed nav */
+.app__content {
+  text-align: center;
+  padding: 96px 24px 24px;
+  /* top, sides, bottom */
+  max-width: 1100px;
+  /* optional: keep readable line length */
+  margin: 0 auto;
+  /* optional: center content area */
 }
 
 /* Nav layout */
@@ -20,13 +30,12 @@
 }
 
 .nav__link {
-  font-size: 28px;
-  color: #c084fc;
+  color: var(--accent);
   text-decoration: underline;
 }
 
 .nav__link--active {
-  color: #ffffff;
+  color: var(--text-h);
   text-decoration: none;
 }
 
@@ -40,13 +49,15 @@
   cursor: pointer;
 }
 
-/* Theme hooks */
-.app--light {
-  background: #ffffff;
-  color: #111827;
+.page--home {
+  text-align: center;
 }
 
-.app--dark {
-  background: #0b0f19;
-  color: #e5e7eb;
+.home-links {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
 }

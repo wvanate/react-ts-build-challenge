@@ -17,21 +17,22 @@ export default function App() {
     setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
   }
 
-  // Optional but nice: put theme on <html> so *global* styles can react
   useEffect(() => {
     document.documentElement.dataset.theme = theme
   }, [theme])
 
   return (
-    <div className={`app app--${theme}`}>
+    <div className="app">
       <NavBar theme={theme} onToggleTheme={toggleTheme} />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/tic-tac-toe" element={<TicTacToePage />} />
-        <Route path="/quotes" element={<QuotesPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <main className="app__content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/tic-tac-toe" element={<TicTacToePage />} />
+          <Route path="/quotes" element={<QuotesPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
     </div>
   )
 }
