@@ -5,11 +5,15 @@
   --bg: #ffffff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  --accent: #2563eb;
+  --accent-bg: rgba(37, 99, 235, 0.12);
+  --accent-border: rgba(37, 99, 235, 0.45);
   --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --surface: #ffffff;
+  --surface-border: #e5e7eb;
+  --surface-text: #111827;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -34,11 +38,14 @@ html[data-theme='dark'] {
   --bg: #16171d;
   --border: #2e303a;
   --code-bg: #1f2028;
-  --accent: #c084fc;
-  --accent-bg: rgba(192, 132, 252, 0.15);
-  --accent-border: rgba(192, 132, 252, 0.5);
+  --accent: #60a5fa;
+  --accent-bg: rgba(96, 165, 250, 0.16);
+  --accent-border: rgba(96, 165, 250, 0.55);
   --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
     rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --surface: #0f172a;
+  --surface-border: #1f2937;
+  --surface-text: #e5e7eb;
 }
 
 /* 3) If user hasn’t toggled, respect OS preference */
