@@ -7,6 +7,7 @@ export default function HomePage() {
             <ul className="home-links">
                 <li><Link to="/tic-tac-toe">Go to Tic Tac Toe</Link></li>
                 <li><Link to="/quotes">Go to Quotes</Link></li>
+                <li><Link to="/search">Go to Search</Link></li>
             </ul>
         </section>
     )

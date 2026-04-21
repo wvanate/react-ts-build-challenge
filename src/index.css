@@ -6,6 +6,7 @@
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #2563eb;
+  --accent-visited: #1d4ed8;
   --accent-bg: rgba(37, 99, 235, 0.12);
   --accent-border: rgba(37, 99, 235, 0.45);
   --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
@@ -39,6 +40,7 @@ html[data-theme='dark'] {
   --border: #2e303a;
   --code-bg: #1f2028;
   --accent: #60a5fa;
+  --accent-visited: #93c5fd;
   --accent-bg: rgba(96, 165, 250, 0.16);
   --accent-border: rgba(96, 165, 250, 0.55);
   --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
@@ -56,9 +58,10 @@ html[data-theme='dark'] {
     --bg: #16171d;
     --border: #2e303a;
     --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
+    --accent: #60a5fa;
+    --accent-visited: #93c5fd;
+    --accent-bg: rgba(96, 165, 250, 0.16);
+    --accent-border: rgba(96, 165, 250, 0.55);
     --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
       rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
@@ -97,6 +100,20 @@ h2 {
 
 p {
   margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+a:visited {
+  color: var(--accent-visited);
+  text-decoration-color: var(--accent-visited);
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
 code {

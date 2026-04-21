@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar'
-
 import HomePage from './pages/HomePage'
 import TicTacToePage from './pages/TicTacToePage'
 import QuotesPage from './pages/QuotesPage'
-
 import './App.css'
+import SearchPage from './pages/SearchPage'
 
 type Theme = 'light' | 'dark'
 
@@ -30,6 +29,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tic-tac-toe" element={<TicTacToePage />} />
           <Route path="/quotes" element={<QuotesPage />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

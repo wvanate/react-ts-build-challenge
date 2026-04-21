@@ -25,6 +25,10 @@ export default function NavBar({ theme, onToggleTheme }: Props) {
                 <NavLink to="/quotes" className={linkClassName}>
                     Quotes
                 </NavLink>
+
+                <NavLink to="/search" className={linkClassName}>
+                    Search
+                </NavLink>
             </nav>
 
             <button type="button" className="nav__button" onClick={onToggleTheme}>

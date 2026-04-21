@@ -84,48 +84,43 @@ export default function BoardGame() {
 
     return (
         <Container maxWidth="sm" sx={{ pt: 10, pb: 6, textAlign: 'center' }}>
+            <div className="page page--tic-tac-toe">
+                <h1>Tic Tac Toe</h1>
 
-            <Typography
-                variant="h2"
-                component="h1"
-                sx={{ mb: 2 }}
-            >
-                Tic Tac Toe
-            </Typography>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 2,
+                        mb: 3,
+                        flexWrap: 'wrap',
+                    }}
+                >
+                    <Typography sx={{ opacity: 0.8 }}>
+                        {gameResults
+                            ? gameResults
+                            : `Player ${playersTurn}'s turn (${playersTurn === 1 ? 'X' : 'O'})`}
+                    </Typography>
+                    <ActionsMenu onNewGame={resetGame} />
+                </Box>
 
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 2,
-                    mb: 3,
-                    flexWrap: 'wrap',
-                }}
-            >
-                <Typography sx={{ opacity: 0.8 }}>
-                    {gameResults
-                        ? gameResults
-                        : `Player ${playersTurn}'s turn (${playersTurn === 1 ? 'X' : 'O'})`}
-                </Typography>
-                <ActionsMenu onNewGame={resetGame} />
-            </Box>
-
-            <Grid container spacing={2}>
-                {SQUARE_IDS.map((squareId) => {
-                    const existingMoveId = occupiedSquares.get(squareId)
-                    return (
-                        <Grid key={squareId} size={4}>
-                            <Square
-                                squareId={squareId}
-                                existingMovePlayerId={existingMoveId}
-                                gameResults={gameResults}
-                                onClick={() => handleMoves(squareId)}
-                            />
-                        </Grid>
-                    )
-                })}
-            </Grid>
+                <Grid container spacing={2}>
+                    {SQUARE_IDS.map((squareId) => {
+                        const existingMoveId = occupiedSquares.get(squareId)
+                        return (
+                            <Grid key={squareId} size={4}>
+                                <Square
+                                    squareId={squareId}
+                                    existingMovePlayerId={existingMoveId}
+                                    gameResults={gameResults}
+                                    onClick={() => handleMoves(squareId)}
+                                />
+                            </Grid>
+                        )
+                    })}
+                </Grid>
+            </div>
 
         </Container>
     )
