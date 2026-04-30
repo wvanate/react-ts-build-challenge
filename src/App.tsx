@@ -6,6 +6,7 @@ import TicTacToePage from './pages/TicTacToePage'
 import QuotesPage from './pages/QuotesPage'
 import './App.css'
 import SearchPage from './pages/SearchPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 type Theme = 'light' | 'dark'
 
@@ -30,7 +31,10 @@ export default function App() {
           <Route path="/tic-tac-toe" element={<TicTacToePage />} />
           <Route path="/quotes" element={<QuotesPage />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* Below reroutes to home on any uknown route */}
+          {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+          {/* Below reroutes to NotFoundPage "404" on any unknown route */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>
