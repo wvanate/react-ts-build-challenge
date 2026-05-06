@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import Card from '../components/ui/Card'
 import List from '../components/ui/List'
 import { http } from '../api/http'
+import axios from 'axios'
 
 type Resource = 'books' | 'characters' | 'houses' | 'spells'
 
@@ -12,6 +13,8 @@ const RESOURCE_LABEL: Record<Resource, string> = {
     houses: 'Houses',
     spells: 'Spells',
 }
+
+const PAGE_SIZE = 6
 
 type PotterCharacter = {
     fullName: string
@@ -57,7 +60,12 @@ type ResourceDataMap = {
     spells: PotterSpell[]
 }
 
+function sleep(ms: number) {
+    return new Promise((r) => setTimeout(r, ms))
+}
+
 async function fetchPotter<R extends Resource>(resource: R): Promise<ResourceDataMap[R]> {
+    await sleep(1200) // Slowing it down to demo Tanstack doing stuff
     const res = await http.get<ResourceDataMap[R]>(`/en/${resource}`)
     return res.data
 }
@@ -70,12 +78,21 @@ function matchesQuery(obj: Record<string, unknown>, q: string) {
     })
 }
 
+function getErrorMessage(err: unknown) {
+    if (axios.isAxiosError(err)) {
+        const status = err.response?.status
+        const statusText = err.response?.statusText
+        return status ? `Request failed (${status}${statusText ? ` ${statusText}` : ''}).` : err.message
+    }
+    if (err instanceof Error) return err.message
+    return 'Request failed.'
+}
+
 export default function SearchPage() {
     const [resource, setResource] = useState<Resource>('characters')
     const [query, setQuery] = useState('')
     const [touched, setTouched] = useState(false)
 
-    const PAGE_SIZE = 6
     const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
     const trimmed = query.trim()
@@ -90,7 +107,11 @@ export default function SearchPage() {
     const { data, isLoading, isError, error, isSuccess, isFetching } = useQuery({
         queryKey: ['potter', 'en', resource],
         queryFn: () => fetchPotter(resource),
+        staleTime: 1000 * 60 * 5,
+        retry: 1,
+        refetchOnWindowFocus: false,
     })
+
 
     const results = useMemo(() => {
         if (!data) return []
@@ -107,7 +128,7 @@ export default function SearchPage() {
         <div className="page page--search">
             <h1>Search</h1>
 
-            <Card title="Potter API Search">
+            <Card title="Potter API">
                 <label className="search-form__label" htmlFor="resourceSelect">
                     Dataset
                 </label>
@@ -149,16 +170,19 @@ export default function SearchPage() {
 
                 {isError ? (
                     <p className="search-form__error">
-                        {(error as Error).message || 'Request failed.'}
+                        {getErrorMessage(error)}
                     </p>
                 ) : null}
             </Card>
 
-            <Card title={shouldShowResults ? `Results (${results.length})` : 'Results'}>
+            <Card title={shouldShowResults ? `Results (${shownResults.length} of ${results.length})` : 'Results'}>
+
                 {!shouldShowResults ? (
                     <p className="muted">Enter a search term to see results.</p>
-                ) : !isSuccess ? (
-                    <p className="muted">Waiting for data…</p>
+                ) : isLoading ? (
+                    <p className="muted">Loading {RESOURCE_LABEL[resource]}…</p>
+                ) : isError ? (
+                    <p className="search-form__error">{getErrorMessage(error)}</p>
                 ) : results.length === 0 ? (
                     <p className="muted">No matches.</p>
                 ) : (
