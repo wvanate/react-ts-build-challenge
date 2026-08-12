@@ -1,37 +1,25 @@
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleTheme } from '../store/themeSlice'
+import type { RootState, AppDispatch } from '../store/store'
 
-type Theme = 'light' | 'dark'
+export default function NavBar() {
+    const theme = useSelector((state: RootState) => state.theme.value)
+    const dispatch = useDispatch<AppDispatch>()
 
-type Props = {
-    theme: Theme
-    onToggleTheme: () => void
-}
-
-export default function NavBar({ theme, onToggleTheme }: Props) {
     const linkClassName = ({ isActive }: { isActive: boolean }) =>
         isActive ? 'nav__link nav__link--active' : 'nav__link'
 
     return (
         <header className="nav">
             <nav className="nav__links">
-                <NavLink to="/" end className={linkClassName}>
-                    Home
-                </NavLink>
-
-                <NavLink to="/tic-tac-toe" className={linkClassName}>
-                    Tic Tac Toe
-                </NavLink>
-
-                <NavLink to="/quotes" className={linkClassName}>
-                    Quotes
-                </NavLink>
-
-                <NavLink to="/search" className={linkClassName}>
-                    Search
-                </NavLink>
+                <NavLink to="/" end className={linkClassName}>Home</NavLink>
+                <NavLink to="/tic-tac-toe" className={linkClassName}>Tic Tac Toe</NavLink>
+                <NavLink to="/quotes" className={linkClassName}>Quotes</NavLink>
+                <NavLink to="/search" className={linkClassName}>Search</NavLink>
             </nav>
 
-            <button type="button" className="nav__button" onClick={onToggleTheme}>
+            <button type="button" className="nav__button" onClick={() => dispatch(toggleTheme())}>
                 Theme: {theme}
             </button>
         </header>
